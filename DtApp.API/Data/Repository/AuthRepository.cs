@@ -59,7 +59,7 @@ namespace DtApp.API.Data.Repository {
             }
         }
 
-        public async Task<bool> UserExists (string username) 
+        public async Task<bool> UserExists (string username)
         {
             if(await _context.Users.AnyAsync(x => x.Username == username))
                 return true;

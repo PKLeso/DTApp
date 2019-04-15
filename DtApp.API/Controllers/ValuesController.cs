@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DtApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace DtApp.API.Controllers {
+namespace DtApp.API.Controllers 
+{
+    [Authorize]
     [Route ("api/[controller]")]
     [ApiController]
 
     // http://localhost:5000/api/values
-    public class ValuesController : ControllerBase {
+    public class ValuesController : ControllerBase 
+    {
         private readonly DataContext _context;
         public ValuesController (DataContext context) {
             _context = context;
@@ -25,7 +29,7 @@ namespace DtApp.API.Controllers {
             return Ok(values);
         }
 
-        // GET api/values/5
+        [AllowAnonymous]
         [HttpGet ("{id}")]
         public async Task<IActionResult> GetValue (int id) {
             var value = await _context.Values.FirstOrDefaultAsync(x => x.Id == id);
