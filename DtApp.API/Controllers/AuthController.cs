@@ -24,7 +24,8 @@ namespace DtApp.API.Controllers
         }
 
         [HttpPost ("register")]
-        public async Task<IActionResult> Register (UserForRegisterDto userForRegisterDto) {
+        public async Task<IActionResult> Register (UserForRegisterDto userForRegisterDto) 
+        {
             userForRegisterDto.username = userForRegisterDto.username.ToLower ();
 
             if (await _repo.UserExists (userForRegisterDto.username))
